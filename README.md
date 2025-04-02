@@ -1,3 +1,44 @@
+# 🚀 Angular SpaceX Missions App
+
+**Author**: Sherry Zarei  
+**Student ID**: 101274382  
+**Course**: COMP 3133 – Web Application Development  
+**Lab Test 2 – Week 13**  
+
+## 🔍 Overview
+
+This Angular application allows users to explore **SpaceX Launch Missions** through a clean, modern UI built with **Angular Material**. The project implements key Angular features such as component interaction, routing, services, and external API consumption. Users can view mission lists, filter by launch year, and access detailed mission information using data from the **SpaceX REST API**.
+
+GitHub Repository: [101274382-lab-test2-comp3133](https://github.com/sherryzarei/101274382-lab-test2-comp3133)  
+Deployed Link: *(add your deployment link here once deployed to Vercel, Render, etc.)*
+
+## 📁 Features Implemented
+
+✅ `missionlist` component to display missions  
+✅ `missionfilter` component to search/filter by year  
+✅ `missiondetails` component to show details of selected mission  
+✅ Angular service to fetch data using **HttpClient**  
+✅ Interface/class to define mission data model  
+✅ UI/UX enhancements using **Angular Material**  
+✅ Routing between components  
+✅ Application hosted online  
+
+## 🧑‍💻 Installation & Running Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/sherryzarei/101274382-lab-test2-comp3133.git
+cd 101274382-lab-test2-comp3133
+
+# Install dependencies
+npm install
+
+# Run the Angular application
+ng serve
+
+# Navigate to: http://localhost:4200
+
+
 # SpacexMissionApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.

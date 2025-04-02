@@ -1,3 +1,12 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 
-export const routes: Routes = [];
+import { MissionlistComponent } from "./missionlist/missionlist.component";
+import { MissiondetailsComponent } from "./missiondetails/missiondetails.component";
+import { MissionfilterComponent } from "./missionfilter/missionfilter.component";
+
+export const routes: Routes = [
+    { path: "missionlist", component: MissionlistComponent },
+    { path: "missiondetails", component: MissiondetailsComponent },
+    { path: "missionfilter", component: MissionfilterComponent },
+    { path: "", redirectTo: "/missionlist", pathMatch: "full" },
+];

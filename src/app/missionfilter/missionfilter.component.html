@@ -1,0 +1,257 @@
+<div style="height: 100vh; width: 90%; margin: auto; max-height: 100vh">
+  <div style="min-height: 15vh; display: flex; width: 100%">
+    <h1
+      style="font-size: 3rem; text-align: center; margin: auto; color: #f3f4f6"
+    >
+      Space X Mission Launch List
+    </h1>
+  </div>
+
+  @if (data.length === 0) {
+  <div style="width: 100%; display: flex; padding: 5rem 0">
+    <span style="margin: auto; width: 50%; text-align: center">Loading...</span>
+  </div>
+  }
+
+  <div style="display: flex; gap: 1.5rem">
+    <!-- Filters -->
+    <div
+      style="
+        height: 100%;
+        width: 15%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      "
+    >
+      <!-- Launch Year Filter -->
+      <div style="display: flex; flex-direction: column; gap: 0.75rem">
+        <h3
+          style="
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: blue;
+          "
+        >
+          Launch Year
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-rows: repeat(5, auto);
+            grid-auto-flow: column;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          @for (item of years; track $index) {
+          <button
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 0.5rem;
+              border: none;
+              cursor: pointer;
+              transition: transform 0.2s ease, background-color 0.2s ease;
+              color: white;
+            "
+            (click)="filterYear(item)"
+            [style.backgroundColor]="
+              selectedYear === item ? '#64748b' : '#3b82f6'
+            "
+            onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='#2563eb';"
+            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor=(selectedYear === item ? '#64748b' : '#3b82f6');"
+          >
+            {{ item }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <!-- Success Launch Filter -->
+      <div
+        style="display: flex; flex-direction: column; gap: 0.75rem; color: blue"
+      >
+        <h3 style="text-align: center; font-weight: 600; font-size: 1.5rem">
+          Success Launch
+        </h3>
+        <div style="display: flex; justify-content: center; gap: 0.5rem">
+          <button
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 0.5rem;
+              border: none;
+              cursor: pointer;
+              transition: transform 0.2s ease, background-color 0.2s ease;
+            "
+            (click)="filterLaunchSuccess(true)"
+            [style.backgroundColor]="
+              selectedLaunchSuccess === true ? '#64748b' : '#3b82f6'
+            "
+            [style.color]="'white'"
+            onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='#2563eb';"
+            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor=(selectedLaunchSuccess === true ? '#64748b' : '#3b82f6');"
+          >
+            Yes
+          </button>
+          <button
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 0.5rem;
+              border: none;
+              cursor: pointer;
+              transition: transform 0.2s ease, background-color 0.2s ease;
+            "
+            (click)="filterLaunchSuccess(false)"
+            [style.backgroundColor]="
+              selectedLaunchSuccess === false ? '#64748b' : '#3b82f6'
+            "
+            [style.color]="'white'"
+            onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='#2563eb';"
+            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor=(selectedLaunchSuccess === false ? '#64748b' : '#3b82f6');"
+          >
+            No
+          </button>
+        </div>
+      </div>
+
+      <!-- Success Land Filter -->
+      <div style="display: flex; flex-direction: column; gap: 0.25rem">
+        <h3
+          style="
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: blue;
+          "
+        >
+          Success Land
+        </h3>
+        <div style="display: flex; justify-content: center; gap: 0.5rem">
+          <button
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 0.5rem;
+              border: none;
+              cursor: pointer;
+              transition: transform 0.2s ease, background-color 0.2s ease;
+            "
+            (click)="filterLandingSuccess(true)"
+            [style.backgroundColor]="
+              selectedLandingSuccess === true ? '#64748b' : '#3b82f6'
+            "
+            [style.color]="'white'"
+            onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='#2563eb';"
+            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor=(selectedLandingSuccess === true ? '#64748b' : '#3b82f6');"
+          >
+            Yes
+          </button>
+          <button
+            style="
+              padding: 0.5rem 1rem;
+              border-radius: 0.5rem;
+              border: none;
+              cursor: pointer;
+              transition: transform 0.2s ease, background-color 0.2s ease;
+            "
+            (click)="filterLandingSuccess(false)"
+            [style.backgroundColor]="
+              selectedLandingSuccess === false ? '#64748b' : '#3b82f6'
+            "
+            [style.color]="'white'"
+            onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='#2563eb';"
+            onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor=(selectedLandingSuccess === false ? '#64748b' : '#3b82f6');"
+          >
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission Cards -->
+    <!-- Mission Cards -->
+    <div
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        width: 85%;
+        gap: 1.25rem;
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+      "
+    >
+      @for (item of filteredData; track $index) {
+      <div
+        (click)="onSeeMoreClick(item)"
+        style="
+          width: 18rem;
+          background-color: #3b82f6;
+          border-radius: 0.75rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease,
+            background-color 0.2s ease;
+        "
+        onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'; this.style.backgroundColor='#809fff';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.1)'; this.style.backgroundColor='#3b82f6';"
+      >
+        <figure>
+          <img
+            style="
+              width: 100%;
+              aspect-ratio: 1/1;
+              padding: 1.25rem;
+              object-fit: contain;
+            "
+            src="{{ item.links.mission_patch_small }}"
+            alt="Mission Patch"
+          />
+        </figure>
+        <div
+          style="
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+          "
+        >
+          <h2 style="font-size: 1.25rem; font-weight: 700">
+            {{ item.mission_name }}
+          </h2>
+          <ul
+            style="list-style: none; padding: 0; margin: 0; font-size: larger"
+          >
+            <li style="display: flex; justify-content: space-between">
+              <p>Mission ID:</p>
+              <p>{{ item.mission_id.join(", ") }}</p>
+            </li>
+            <li style="display: flex; justify-content: space-between">
+              <p>Launch Year:</p>
+              <p>{{ item.launch_year }}</p>
+            </li>
+            <li style="display: flex; justify-content: space-between">
+              <p>Launch Success:</p>
+              <p>{{ item.launch_success ? "Yes" : "No" }}</p>
+            </li>
+            <li style="display: flex; justify-content: space-between">
+              <p>Land Success:</p>
+              <p>
+                {{
+                  item.rocket.first_stage.cores[0].land_success === null
+                    ? "N/A"
+                    : item.rocket.first_stage.cores[0].land_success === true
+                    ? "Yes"
+                    : "No"
+                }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

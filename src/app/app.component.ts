@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { MissionlistComponent } from "./missionlist/missionlist.component";
+import { MissionfilterComponent } from "./missionfilter/missionfilter.component";
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: "app-root",
+    standalone: true,
+    imports: [RouterOutlet, MissionlistComponent, MissionfilterComponent, RouterModule],
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = 'spacex-mission-app';
+    title = "101274382-lab-test2-comp3133";
 }
